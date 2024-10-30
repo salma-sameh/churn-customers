@@ -1,46 +1,49 @@
-Customer Churn Prediction
-This project aims to predict customer churn in a business context using machine learning. The project analyzes customer data, explores various predictive models, and selects the best one to help businesses proactively address potential customer loss.
+# Telco Customer Churn Prediction
 
-Project Overview
-The dataset used in this project includes features related to customer behaviors and demographics. The goal is to identify customers who are at risk of churning, enabling targeted retention efforts.
+This project analyzes customer churn using data from a telecommunications company. The primary goal is to predict customer churn based on various features related to customer demographics, account information, and services used. The dataset is imbalanced, and feature engineering was applied to improve the model's performance.
 
-Notebook Structure
-Importing Libraries:
-The notebook employs common libraries including:
+## Dataset Overview
 
-numpy, pandas: For data manipulation and analysis
-seaborn, matplotlib: For visualizations
-scikit-learn: For building and evaluating machine learning models
-Loading and Exploring the Data:
-The dataset is loaded and examined to understand its structure and identify potential data quality issues.
+The dataset includes various features such as:
+- **Demographics**: Gender, SeniorCitizen, Partner, Dependents.
+- **Services**: PhoneService, MultipleLines, InternetService, OnlineSecurity, OnlineBackup, TechSupport, StreamingTV, StreamingMovies.
+- **Account Info**: Contract, PaperlessBilling, PaymentMethod, MonthlyCharges, TotalCharges, tenure.
+- **Target**: Churn (Yes/No).
 
-Data Preprocessing:
+## Key Steps
 
-Address missing values and data types.
-Encode categorical features to make the data suitable for modeling.
-Scale numerical data to enhance model performance.
-Exploratory Data Analysis (EDA):
+### 1. Data Preprocessing
+- **Handling Missing Values**: Missing values were identified and filled.
+- **Categorical Encoding**: Converted categorical features using label encoding.
+- **Feature Scaling**: Standardized numerical features using `StandardScaler`.
 
-Visualize customer demographics, behaviors, and their correlations with churn.
-Understand key factors influencing customer churn.
-Feature Selection:
+### 2. Feature Engineering
+- **Tenure Grouping**: Customers were grouped based on their tenure to create the `TenureGroup` feature.
+- **Phone and Internet Bundling**: A combined feature `HasPhoneAndInternet` was created to capture whether customers subscribed to both services.
+- **Imbalanced Data Handling**: Applied **SMOTE** (Synthetic Minority Over-sampling Technique) to handle the class imbalance in the target variable (Churn).
 
-Use feature selection techniques like Recursive Feature Elimination (RFE) to identify impactful features.
-Feature selection helps improve model performance by focusing on relevant data attributes.
-Model Training and Comparison:
+### 3. Modeling
+The following models were used for classification:
+- **Logistic Regression**
+- **Decision Tree Classifier**
+- **Random Forest Classifier**
 
-Train several machine learning models, including:
-Logistic Regression
-Random Forest Classifier
-Gradient Boosting Classifier
-Perform hyperparameter tuning to optimize model accuracy and effectiveness.
-Model Evaluation:
+### 4. Performance Comparison
 
-Evaluate models using metrics such as:
-Accuracy
-Precision
-Recall
-F1-score
-The best-performing model is selected based on its overall performance and business value.
-Results
-The project successfully identifies key indicators of customer churn, with the best model achieving high predictive accuracy. This enables effective segmentation and targeting of high-risk customers for retention efforts.
+| Model                  | Accuracy | Precision (0) | Recall (0) | F1-Score (0) | Precision (1) | Recall (1) | F1-Score (1) |
+|------------------------|----------|---------------|------------|--------------|---------------|------------|--------------|
+| Logistic Regression     | 85.30%   | 0.86          | 0.87       | 0.86         | 0.85          | 0.84       | 0.85         |
+| Decision Tree Classifier| 81.08%   | 0.82          | 0.81       | 0.82         | 0.88          | 0.81       | 0.84         |
+| Random Forest Classifier| 86.20%   | 0.88          | 0.86       | 0.87         | 0.85          | 0.87       | 0.86         |
+
+### 5. Visualization
+Key visualizations include churn distribution across categorical features like gender, contract type, internet service, and others.
+
+### Conclusion
+- **Logistic Regression** and **Random Forest** performed well, with **Random Forest** showing the highest accuracy at **86.20%**.
+- **SMOTE** was effective in addressing the imbalanced data problem, leading to more reliable model evaluation.
+
+## How to Run the Code
+1. Clone the repository.
+   ```bash
+   git clone https://github.com/your-repo-url.git
